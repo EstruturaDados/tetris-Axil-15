@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 int main() {
 
@@ -7,9 +8,16 @@ int main() {
 
     printf("Bem-vindo(a) ao Desafio Codigo da Ilha\n");
 
+    // limpar buffer antes do fgets
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+
     // 1) Declarar nome do personagem
     printf("Digite o nome do seu personagem: ");
     fgets(nome, sizeof(nome), stdin);
+
+    // remover \n do fgets
+    nome[strcspn(nome, "\n")] = '\0';
 
     // 2) Somar dois valores inteiros
     printf("\nAgora digite dois valores inteiros para somar:\n");
@@ -22,12 +30,11 @@ int main() {
     soma = valor1 + valor2;
 
     // 3) Exibir os dados
-    printf("Nome do personagem: %s", nome);
+    printf("Nome do personagem: %s\n", nome);
     printf("Primeiro valor: %d\n", valor1);
     printf("Segundo valor: %d\n", valor2);
     printf("Soma dos valores: %d\n", soma);
     printf("----------------------------------\n\n");
-
 
     float altura;
     int idade;
@@ -40,7 +47,6 @@ int main() {
     scanf("%f", &altura);
 
     // 2) Estrutura condicional: verificar se pode entrar na caverna
-
     if (idade >= 18 && altura >= 1.60) {
         printf("Voce esta apto para entrar na caverna misteriosa!\n");
     } else {
